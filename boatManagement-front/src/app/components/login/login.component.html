@@ -1,0 +1,46 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!this.isAuthenticated()">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input
+          type="text"
+          class="form-control"
+          id="login"
+          required
+          name="login"
+          formControlName="login"
+          [ngClass]="{ 'is-invalid': submitted && control['login'].errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          required
+          name="password"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && control['password'].errors }"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Login</button>
+      </form>
+    </div>
+    <div *ngIf="this.isAuthenticated()">
+      <button (click)="logout()" class="btn btn-danger">Logout</button>
+    </div>
+    <br>
+    <div class="form-group" *ngIf="errorMessage.length > 0">
+      <div
+        class="alert alert-danger"
+        role="alert"
+      >
+        {{ errorMessage }}
+      </div>
+    </div>
+
+  </div>
+</div>

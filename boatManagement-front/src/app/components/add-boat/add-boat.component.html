@@ -1,0 +1,41 @@
+<div>
+  <div class="submit-form">
+    <h4>Add Boat</h4>
+    <div>
+      <form [formGroup]="addForm" (ngSubmit)="addBoat()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          name="name"
+          formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && control['name'].errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          class="form-control"
+          id="description"
+          name="description"
+          formControlName="description"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <br>
+      <div class="form-group" *ngIf="errorMessage.length > 0">
+        <div
+          class="alert alert-danger"
+          role="alert"
+        >
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

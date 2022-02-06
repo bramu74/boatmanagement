@@ -1,0 +1,68 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentBoat.id">
+    <h4>Boat details</h4>
+    <div>
+      <label><strong>Name:</strong></label> {{ currentBoat.name }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentBoat.description }}
+    </div>
+    <a
+      class="badge badge-warning"
+      routerLink="/boats/{{ currentBoat.id }}"
+    >
+      Edit
+    </a>
+  </div>
+  <div *ngIf="!currentBoat.id">
+    <br />
+    <p>Please select a Boat</p>
+  </div>
+</div>
+<ng-template #editable>
+  <div *ngIf="currentBoat.id" class="edit-form">
+    <h4>Tutorial</h4>
+    <form [formGroup]="updateForm" (ngSubmit)="updateBoat()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && control['name'].errors }"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          name="description"
+          formControlName="description"
+        />
+      </div>
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+    >
+      Update
+    </button>
+    </form>
+    <button class="badge badge-danger mr-2" (click)="deleteBoat()">
+      Delete
+    </button>
+  </div>
+  <div class="form-group" *ngIf="errorMessage.length > 0">
+    <div
+      class="alert alert-danger"
+      role="alert"
+    >
+      {{ errorMessage }}
+    </div>
+  </div>
+</ng-template>
+
